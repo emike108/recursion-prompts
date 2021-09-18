@@ -7,20 +7,99 @@
 // Example: 5! = 5 x 4 x 3 x 2 x 1 = 120
 // factorial(5); // 120
 var factorial = function(n) {
+  //set negative number edge case
+  if (n < 0) {
+    return null;
+  }
+  //declare solution variable
+  var solution;
+  //set base case, when n equals 0
+  if (n === 0) {
+    return 1;
+  }
+  //set recursive case
+  //if n is greater than one
+  if (n >= 1) {
+    //solution equals n * factorial of lower number
+    solution = n * factorial(n - 1);
+    return solution;
+  }
+   //return solution
+  return solution;
 };
 
 // 2. Compute the sum of an array of integers.
 // sum([1,2,3,4,5,6]); // 21
 var sum = function(array) {
+
+  //create array duplicate
+  var duplicateArray = array.slice();
+
+  //base case: if duplicate array length is 0
+  if (duplicateArray.length === 0) {
+    //return 0
+    return 0;
+  //recursion case: else
+  } else {
+    //create popped variable
+    var poppedVariable = duplicateArray.pop();
+    //return popped variable plus sum function called on the duplicate array
+    return poppedVariable + sum(duplicateArray);
+  }
+
+
+
 };
 
 // 3. Sum all numbers in an array containing nested arrays.
 // arraySum([1,[2,3],[[4]],5]); // 15
 var arraySum = function(array) {
+  //declare edge case
+  if (array.length === 0) {
+    return 0;
+  }
+  //create copy of array
+  var arrayCopy = array.slice();
+  //declare soliton variable (output to be a number)
+  var solution = 0;
+  //need to iterate over the array
+  arrayCopy.forEach(function(element) {
+    //base case: if current index is a number add to suliton variable
+    if (typeof element === 'number') {
+      solution += element;
+      //else
+    } else {
+      //iterative case: call iterative function on index
+      solution += arraySum(element);
+    }
+    //return solution variable
+    // return solution;
+  });
+  //return solution variable
+  return solution;
+
 };
 
 // 4. Check if a number is even.
 var isEven = function(n) {
+  //recursively subtract 2 from number until either 1 (false) or 0 (true)
+  //check to see if n is negative
+  if (n < 0) {
+    //make n even
+    n = Math.abs(n);
+  }
+  //base case : if n is 0 then n even/true
+  if (n === 0) {
+    return true;
+  }
+  //if n is 1 then n odd/false
+  if (n === 1) {
+    return false;
+  }
+
+  // recursive case: call isEven on n minus 2 until it hits the base case
+  return isEven(n - 2);
+
 };
 
 // 5. Sum all integers below a given integer.
